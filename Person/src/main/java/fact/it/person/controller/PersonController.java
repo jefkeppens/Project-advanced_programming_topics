@@ -25,8 +25,8 @@ public class PersonController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<PersonResponse> getAllPeopleByName(@RequestParam List<String> name) {
-        return personService.getAllPeopleByName(name);
+    public List<PersonResponse> getByEmail(@RequestParam String email) {
+        return personService.getByEmail(email);
     }
 
     @GetMapping("/all")

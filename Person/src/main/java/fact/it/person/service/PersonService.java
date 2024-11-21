@@ -29,8 +29,8 @@ public class PersonService {
         personRepository.save(person);
     }
 
-    public List<PersonResponse> getAllPeopleByName(List<String> name) {
-        List<Person> people = personRepository.findByNameIn(name);
+    public List<PersonResponse> getByEmail(String email) {
+        List<Person> people = personRepository.findByEmail(email);
 
         return people.stream().map(this::mapToPersonResponse).toList();
     }
