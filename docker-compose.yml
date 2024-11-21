@@ -1,6 +1,7 @@
 services:
   mongo-people:
     image: mongo:latest
+    container_name: mongo-people
     ports:
       - 27017:27017
     volumes:
@@ -8,6 +9,7 @@ services:
 
   mongo-rides:
     image: mongo:latest
+    container_name: mongo-rides
     ports:
       - 27018:27017
     volumes:
@@ -15,6 +17,7 @@ services:
     
   mysql-tickets:
     image: mysql:latest
+    container_name: mysql-tickets
     ports:
       - 3306:3306
     volumes:
@@ -24,6 +27,7 @@ services:
     
   mysql-events:
     image: mysql:latest
+    container_name: mysql-events
     ports:
       - 3307:3306
     volumes:
@@ -35,6 +39,8 @@ services:
     depends_on:
       - mongo-people
     image: jefk13/person-service
+    container_name: person-service
+    restart: on-failure
     ports:
       - 8083:8083
     links:
@@ -48,6 +54,8 @@ services:
       - mysql-tickets
       - person-service
     image: jefk13/ticket-service
+    container_name: ticket-service
+    restart: on-failure
     ports:
       - 8082:8082
     links:
@@ -62,6 +70,8 @@ services:
     depends_on:
       - mongo-rides
     image: jefk13/ride-service
+    container_name: ride-service
+    restart: on-failure
     ports:
       - 8080:8080
     links:
@@ -75,6 +85,8 @@ services:
     depends_on:
       - mysql-events
     image: jefk13/event-service
+    container_name: event-service
+    restart: on-failure
     ports:
       - 8081:8081
     links:
@@ -83,7 +95,7 @@ services:
       MYSQL_DB_USERNAME: root
       MYSQL_DB_PASSWORD: abc123
       MYSQL_DB_HOST: mysql-events
-      MYSQL_DB_PORT: 3307
+      MYSQL_DB_PORT: 3306
 
   api-gateway:
     depends_on:
@@ -92,6 +104,7 @@ services:
       - ride-service
       - event-service
     image: jefk13/api-gateway
+    container_name: api-gateway
     ports:
       - 8084:8084
     links:
