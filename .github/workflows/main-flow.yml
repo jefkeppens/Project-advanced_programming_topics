@@ -114,7 +114,7 @@ jobs:
 
   apigateway:
     runs-on: ubuntu-latest
-    name: Java 17 build, test, deliver ede-api-gateway container
+    name: Java 17 build, test, deliver api-gateway container
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
