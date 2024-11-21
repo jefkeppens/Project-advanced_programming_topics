@@ -7,6 +7,7 @@ import fact.it.ticket.model.Ticket;
 import fact.it.ticket.repository.TicketRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,11 +25,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TicketService {
     private final TicketRepository ticketRepository;
+
     private final WebClient webClient;
+
+
+    @Value("${PERSON_SERVICE_BASEURL:http://localhost:8083}")
+    private String personServiceBaseUrl;
 
     public boolean orderTicket(TicketRequest ticketRequest) {
         PersonResponse[] personResponse = webClient.get()
-                .uri("http://locahost:8083/api/person/" + ticketRequest.getPersonEmail())
+                .uri(personServiceBaseUrl + "/api/person/" + ticketRequest.getPersonEmail())
                 .retrieve()
                 .bodyToMono(PersonResponse[].class)
                 .block();
