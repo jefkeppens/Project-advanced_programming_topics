@@ -20,6 +20,7 @@ public class RideService {
                 .type(rideRequest.getType())
                 .capacity(rideRequest.getCapacity())
                 .duration(rideRequest.getDuration())
+                .responsibleEmail(rideRequest.getResponsibleEmail())
                 .build();
 
         rideRepository.save(ride);

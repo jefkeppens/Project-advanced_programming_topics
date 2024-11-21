@@ -14,4 +14,5 @@ public class RideRequest {
     private String type;
     private int capacity;
     private int duration;
+    private String responsibleEmail;
 }
