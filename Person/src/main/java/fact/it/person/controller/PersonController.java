@@ -23,9 +23,9 @@ public class PersonController {
         personService.createPerson(personRequest);
     }
 
-    @GetMapping
+    @GetMapping("/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public List<PersonResponse> getByEmail(@RequestParam String email) {
+    public List<PersonResponse> getByEmail(@PathVariable String email) {
         return personService.getByEmail(email);
     }
 

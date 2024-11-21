@@ -1,0 +1,176 @@
+server:
+  port: 8084
+
+logging:
+  level:
+    root: info
+    org.springframework.cloud.gateway: trace
+    org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: info
+    reactor.netty: trace
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: person-service-post
+          uri: http://${PERSON_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/people/add
+            - Method=POST
+          filters:
+            - SetPath=/api/person
+
+        - id: person-service-one
+          uri: http://${PERSON_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/people/{email}
+            - Method=GET
+          filters:
+            - SetPath=/api/person/{email}
+
+        - id: person-service-all
+          uri: http://${PERSON_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/people
+            - Method=GET
+          filters:
+            - SetPath=/api/person/all
+
+
+        - id: ticket-service-post
+          uri: http://${TICKET_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/tickets/add
+            - Method=POST
+          filters:
+            - SetPath=/api/ticket
+
+        - id: ticket-service-one
+          uri: http://${TICKET_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/tickets/{ticketNumber}
+            - Method=GET
+          filters:
+            - SetPath=/api/ticket/{ticketNumber}
+
+        - id: ticket-service-all
+          uri: http://${TICKET_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/tickets
+            - Method=GET
+          filters:
+            - SetPath=/api/ticket/all
+
+        - id: ticket-service-delete
+          uri: http://${TICKET_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/tickets/delete/{ticketNumber}
+            - Method=DELETE
+          filters:
+            - SetPath=/api/ticket/{ticketNumber}
+
+        - id: ticket-service-update
+          uri: http://${TICKET_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/tickets/update/{ticketNumber}
+            - Method=PUT
+          filters:
+            - SetPath=/api/ticket/{ticketNumber}
+
+
+        - id: event-service-all
+          uri: http://${EVENT_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/events
+            - Method=GET
+          filters:
+            - SetPath=/api/events/all
+
+        - id: event-service-update
+          uri: http://${EVENT_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/events/name/{name}
+            - Method=GET
+          filters:
+            - SetPath=/api/events/name/{name}
+
+        - id: event-service-name
+          uri: http://${EVENT_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/events/location/{location}
+            - Method=GET
+          filters:
+            - SetPath=/api/events/location/{location}
+
+        - id: event-service-post
+          uri: http://${EVENT_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/events/add
+            - Method=POST
+          filters:
+            - SetPath=/api/events
+
+        - id: event-service-put
+          uri: http://${EVENT_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/events/update/{name}
+            - Method=PUT
+          filters:
+            - SetPath=/api/events/{name}
+
+        - id: event-service-delete
+          uri: http://${EVENT_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/events/delete/{name}
+            - Method=DELETE
+          filters:
+            - SetPath=/api/events/{name}
+
+
+        - id: ride-service-all
+          uri: http://${RIDE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/rides
+            - Method=GET
+          filters:
+            - SetPath=/api/ride/all
+
+        - id: ride-service-update
+          uri: http://${RIDE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/rides/name/{name}
+            - Method=GET
+          filters:
+            - SetPath=/api/ride/name/{name}
+
+        - id: ride-service-name
+          uri: http://${RIDE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/rides/type/{type}
+            - Method=GET
+          filters:
+            - SetPath=/api/ride/type/{type}
+
+        - id: ride-service-post
+          uri: http://${RIDE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/rides/add
+            - Method=POST
+          filters:
+            - SetPath=/api/ride
+
+        - id: ride-service-put
+          uri: http://${RIDE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/rides/update/{name}
+            - Method=PUT
+          filters:
+            - SetPath=/api/ride/{name}
+
+        - id: ride-service-delete
+          uri: http://${RIDE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/rides/delete/{name}
+            - Method=DELETE
+          filters:
+            - SetPath=/api/ride/{name}

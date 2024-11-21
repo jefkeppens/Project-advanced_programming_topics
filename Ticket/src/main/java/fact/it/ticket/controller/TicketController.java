@@ -24,16 +24,16 @@ public class TicketController {
         return (result ? "Tickets ordered successfully" : "Failed to order tickets");
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{ticketNumber}")
     @ResponseStatus(HttpStatus.OK)
-    public String deleteTicket(@RequestParam String ticketNumber) {
+    public String deleteTicket(@PathVariable String ticketNumber) {
         boolean result = ticketService.removeTicket(ticketNumber);
         return (result ? "Ticket successfully deleted" : "Failed to delete ticket");
     }
 
-    @PutMapping
+    @PutMapping("/{ticketNumber}")
     @ResponseStatus(HttpStatus.OK)
-    public String updateTicket(@RequestParam String ticketNumber, @RequestBody Ticket ticket) {
+    public String updateTicket(@PathVariable String ticketNumber, @RequestBody Ticket ticket) {
         boolean result = ticketService.updateTicket(ticketNumber, ticket);
         return (result ? "Ticket updated successfully" : "Failed to update ticket");
     }
