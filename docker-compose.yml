@@ -49,6 +49,7 @@ services:
     links:
       - mysql-tickets
     environment:
+      PERSON_SERVICE_BASEURL: person-service:8083
       MYSQL_DB_USERNAME: root
       MYSQL_DB_PASSWORD: abc123
       MYSQL_DB_HOST: mysql-tickets
@@ -63,7 +64,6 @@ services:
     links:
       - mongo-rides
     environment:
-      PERSON_SERVICE_BASEURL: person-service:8083
       MONGODB_PORT: 27017
       MONGODB_HOST: mongo-rides
 

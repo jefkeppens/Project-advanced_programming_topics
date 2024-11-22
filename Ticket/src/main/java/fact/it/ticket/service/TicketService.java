@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -31,26 +32,30 @@ public class TicketService {
     private final WebClient webClient;
 
 
-    @Value("${PERSON_SERVICE_BASEURL:http://localhost:8083}")
+    @Value("${PERSON_SERVICE_BASEURL}")
     private String personServiceBaseUrl;
 
     public boolean orderTicket(TicketRequest ticketRequest) {
-        PersonResponse[] personResponse = webClient.get()
-                .uri(personServiceBaseUrl + "/api/person/" + ticketRequest.getPersonEmail())
-                .retrieve()
-                .bodyToMono(PersonResponse[].class)
-                .block();
-        if (personResponse != null && personResponse[0].isVisitor()) {
-            Ticket ticket = Ticket.builder()
-                    .ticketNumber(UUID.randomUUID().toString())
-                    .eventName(ticketRequest.getEventName())
-                    .purchaseDate(LocalDate.now())
-                    .personEmail(ticketRequest.getPersonEmail())
-                    .build();
+        try {
+            PersonResponse[] personResponse = webClient.get()
+                    .uri(personServiceBaseUrl + "/api/person/" + ticketRequest.getPersonEmail())
+                    .retrieve()
+                    .bodyToMono(PersonResponse[].class)
+                    .block();
+            if (personResponse != null && personResponse[0].isVisitor()) {
+                Ticket ticket = Ticket.builder()
+                        .ticketNumber(UUID.randomUUID().toString())
+                        .eventName(ticketRequest.getEventName())
+                        .purchaseDate(LocalDate.now())
+                        .personEmail(ticketRequest.getPersonEmail())
+                        .build();
 
-            ticketRepository.save(ticket);
+                ticketRepository.save(ticket);
 
-            return true;
+                return true;
+            }
+        } catch(WebClientRequestException exception) {
+            return false;
         }
 
         return false;
