@@ -2,24 +2,18 @@ services:
   mongo-people:
     image: mongo:latest
     container_name: mongo-people
-    ports:
-      - 27017:27017
     volumes:
       - mongodb_person_data:/data/db
 
   mongo-rides:
     image: mongo:latest
     container_name: mongo-rides
-    ports:
-      - 27018:27017
     volumes:
       - mongodb_ride_data:/data/db
     
   mysql-tickets:
     image: mysql:latest
     container_name: mysql-tickets
-    ports:
-      - 3306:3306
     volumes:
       - mysql_ticket_data:/var/lib/mysql
     environment:
@@ -28,8 +22,6 @@ services:
   mysql-events:
     image: mysql:latest
     container_name: mysql-events
-    ports:
-      - 3307:3306
     volumes:
       - mysql_event_data:/var/lib/mysql
     environment:
@@ -41,8 +33,6 @@ services:
     image: jefk13/person-service
     container_name: person-service
     restart: on-failure
-    ports:
-      - 8083:8083
     links:
       - mongo-people
     environment:
@@ -56,8 +46,6 @@ services:
     image: jefk13/ticket-service
     container_name: ticket-service
     restart: on-failure
-    ports:
-      - 8082:8082
     links:
       - mysql-tickets
     environment:
@@ -72,8 +60,6 @@ services:
     image: jefk13/ride-service
     container_name: ride-service
     restart: on-failure
-    ports:
-      - 8080:8080
     links:
       - mongo-rides
     environment:
@@ -87,8 +73,6 @@ services:
     image: jefk13/event-service
     container_name: event-service
     restart: on-failure
-    ports:
-      - 8081:8081
     links:
       - mysql-events
     environment:

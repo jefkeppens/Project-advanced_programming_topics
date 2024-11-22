@@ -6,6 +6,8 @@ import fact.it.eventservice.model.Event;
 import fact.it.eventservice.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,7 +21,7 @@ public class EventService {
     public void createEvent(EventRequest eventRequest){
         Event event = Event.builder()
                 .name(eventRequest.getName())
-                .date(eventRequest.getDate())
+                .date(LocalDate.now())
                 .location(eventRequest.getLocation())
                 .build();
 
@@ -47,7 +49,6 @@ public class EventService {
         if (optionalEvent.isPresent()) {
             Event event = optionalEvent.get();
             event.setName(eventRequest.getName());
-            event.setDate(eventRequest.getDate());
             event.setLocation(eventRequest.getLocation());
             eventRepository.save(event);
         }

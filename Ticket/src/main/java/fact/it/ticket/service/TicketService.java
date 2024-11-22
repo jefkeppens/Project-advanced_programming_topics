@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,9 +42,9 @@ public class TicketService {
                 .block();
         if (personResponse != null && personResponse[0].isVisitor()) {
             Ticket ticket = Ticket.builder()
-                    .ticketNumber(ticketRequest.getTicketNumber())
+                    .ticketNumber(UUID.randomUUID().toString())
                     .eventName(ticketRequest.getEventName())
-                    .purchaseDate(ticketRequest.getPurchaseDate())
+                    .purchaseDate(LocalDate.now())
                     .personEmail(ticketRequest.getPersonEmail())
                     .build();
 
@@ -55,7 +57,12 @@ public class TicketService {
     }
 
 
-    public boolean updateTicket(String ticketNumber, Ticket ticket) {
+    public boolean updateTicket(String ticketNumber, TicketRequest ticketRequest) {
+        Ticket ticket = ticketRepository.findByTicketNumber(ticketNumber).get(0);
+
+        ticket.setEventName(ticketRequest.getEventName());
+        ticket.setPersonEmail(ticketRequest.getPersonEmail());
+
         ticketRepository.updateByTicketNumber(ticketNumber, ticket);
 
         return true;

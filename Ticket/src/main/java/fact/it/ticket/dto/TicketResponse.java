@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -14,6 +15,6 @@ import java.util.Date;
 public class TicketResponse {
     private long id;
     private String ticketNumber;
-    private Date purchaseDate;
+    private LocalDate purchaseDate;
     private String eventName;
 }

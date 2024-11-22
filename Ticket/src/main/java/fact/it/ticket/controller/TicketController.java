@@ -33,8 +33,8 @@ public class TicketController {
 
     @PutMapping("/{ticketNumber}")
     @ResponseStatus(HttpStatus.OK)
-    public String updateTicket(@PathVariable String ticketNumber, @RequestBody Ticket ticket) {
-        boolean result = ticketService.updateTicket(ticketNumber, ticket);
+    public String updateTicket(@PathVariable String ticketNumber, @RequestBody TicketRequest ticketRequest) {
+        boolean result = ticketService.updateTicket(ticketNumber, ticketRequest);
         return (result ? "Ticket updated successfully" : "Failed to update ticket");
     }
 

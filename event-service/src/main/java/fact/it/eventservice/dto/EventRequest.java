@@ -14,6 +14,5 @@ import java.util.Date;
 @NoArgsConstructor
 public class EventRequest {
     private String name;
-    private LocalDate date;
     private String location;
 }

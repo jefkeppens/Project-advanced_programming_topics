@@ -12,8 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TicketRequest {
-    private String ticketNumber;
-    private Date purchaseDate;
     private String personEmail;
     private String eventName;
 }
