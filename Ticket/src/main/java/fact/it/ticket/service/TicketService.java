@@ -32,7 +32,7 @@ public class TicketService {
     private final WebClient webClient;
 
 
-    @Value("${PERSON_SERVICE_BASEURL}")
+    @Value("http://${PERSON_SERVICE_BASEURL}")
     private String personServiceBaseUrl;
 
     public boolean orderTicket(TicketRequest ticketRequest) {

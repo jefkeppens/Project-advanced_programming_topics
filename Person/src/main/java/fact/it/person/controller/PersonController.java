@@ -25,7 +25,7 @@ public class PersonController {
 
     @GetMapping("/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public List<PersonResponse> getByEmail(@PathVariable String email) {
+    public PersonResponse getByEmail(@PathVariable String email) {
         return personService.getByEmail(email);
     }
 
@@ -33,5 +33,17 @@ public class PersonController {
     @ResponseStatus(HttpStatus.OK)
     public List<PersonResponse> getAllPeople() {
         return personService.getAllPeople();
+    }
+
+    @PutMapping("/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updatePerson(@PathVariable String email, @RequestBody PersonRequest personRequest) {
+        personService.updatePerson(email, personRequest);
+    }
+
+    @DeleteMapping("/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletePerson(@PathVariable String email) {
+        personService.removePerson(email);
     }
 }

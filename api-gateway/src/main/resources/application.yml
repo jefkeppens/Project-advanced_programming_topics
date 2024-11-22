@@ -48,6 +48,22 @@ spring:
           filters:
             - SetPath=/api/person/all
 
+        - id: person-service-delete
+          uri: http://${PERSON_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/people/delete/{email}
+            - Method=DELETE
+          filters:
+            - SetPath=/api/person/{email}
+
+        - id: person-service-update
+          uri: http://${PERSON_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/person/update/{email}
+            - Method=PUT
+          filters:
+            - SetPath=/api/person/{email}
+
 
         - id: ticket-service-post
           uri: http://${TICKET_SERVICE_BASEURL:localhost:8082}

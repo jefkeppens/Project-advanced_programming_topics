@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -29,16 +30,42 @@ public class PersonService {
         personRepository.save(person);
     }
 
-    public List<PersonResponse> getByEmail(String email) {
-        List<Person> people = personRepository.findByEmail(email);
+    public PersonResponse getByEmail(String email) {
+        Optional<Person> optionalPerson = personRepository.findByEmail(email);
 
-        return people.stream().map(this::mapToPersonResponse).toList();
+        return optionalPerson.map(this::mapToPersonResponse).orElse(null);
     }
 
     public List<PersonResponse> getAllPeople() {
         List<Person> people = personRepository.findAll();
 
         return people.stream().map(this::mapToPersonResponse).toList();
+    }
+
+    public boolean updatePerson(String personEmail, PersonRequest personRequest) {
+        Optional<Person> optionalPerson = personRepository.findByEmail(personEmail);
+        if (optionalPerson.isPresent()) {
+            Person person = optionalPerson.get();
+            person.setName(personRequest.getName());
+            person.setVisitor(personRequest.isVisitor());
+            person.setPhone(personRequest.getPhone());
+            person.setEmail(personRequest.getEmail());
+            personRepository.save(person);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean removePerson(String personEmail) {
+        Optional<Person> optionalPerson = personRepository.findByEmail(personEmail);
+
+        if (optionalPerson.isPresent()) {
+            personRepository.delete(optionalPerson.get());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private PersonResponse mapToPersonResponse(Person person) {
