@@ -18,7 +18,7 @@ public class TicketController {
     private final TicketService ticketService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public String orderTicket(@RequestBody TicketRequest ticketRequest) {
         boolean result = ticketService.orderTicket(ticketRequest);
         return (result ? "Tickets ordered successfully" : "Failed to order tickets");

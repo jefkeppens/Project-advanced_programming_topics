@@ -59,7 +59,7 @@ spring:
         - id: person-service-update
           uri: http://${PERSON_SERVICE_BASEURL:localhost:8083}
           predicates:
-            - Path=/person/update/{email}
+            - Path=/people/update/{email}
             - Method=PUT
           filters:
             - SetPath=/api/person/{email}
@@ -114,7 +114,7 @@ spring:
           filters:
             - SetPath=/api/events/all
 
-        - id: event-service-update
+        - id: event-service-name
           uri: http://${EVENT_SERVICE_BASEURL:localhost:8081}
           predicates:
             - Path=/events/name/{name}
@@ -122,7 +122,7 @@ spring:
           filters:
             - SetPath=/api/events/name/{name}
 
-        - id: event-service-name
+        - id: event-service-location
           uri: http://${EVENT_SERVICE_BASEURL:localhost:8081}
           predicates:
             - Path=/events/location/{location}
@@ -138,7 +138,7 @@ spring:
           filters:
             - SetPath=/api/events
 
-        - id: event-service-put
+        - id: event-service-update
           uri: http://${EVENT_SERVICE_BASEURL:localhost:8081}
           predicates:
             - Path=/events/update/{name}
@@ -163,7 +163,7 @@ spring:
           filters:
             - SetPath=/api/ride/all
 
-        - id: ride-service-update
+        - id: ride-service-name
           uri: http://${RIDE_SERVICE_BASEURL:localhost:8080}
           predicates:
             - Path=/rides/name/{name}
@@ -171,7 +171,7 @@ spring:
           filters:
             - SetPath=/api/ride/name/{name}
 
-        - id: ride-service-name
+        - id: ride-service-type
           uri: http://${RIDE_SERVICE_BASEURL:localhost:8080}
           predicates:
             - Path=/rides/type/{type}
@@ -187,7 +187,7 @@ spring:
           filters:
             - SetPath=/api/ride
 
-        - id: ride-service-put
+        - id: ride-service-update
           uri: http://${RIDE_SERVICE_BASEURL:localhost:8080}
           predicates:
             - Path=/rides/update/{name}

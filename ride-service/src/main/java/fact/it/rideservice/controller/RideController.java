@@ -35,7 +35,7 @@ public class RideController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public void createRide(@RequestBody RideRequest rideRequest){
         rideService.createRide(rideRequest);
     }

@@ -18,7 +18,7 @@ public class PersonController {
     private final PersonService personService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public void createPerson(@RequestBody PersonRequest personRequest) {
         personService.createPerson(personRequest);
     }

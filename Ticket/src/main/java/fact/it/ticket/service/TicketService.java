@@ -37,12 +37,12 @@ public class TicketService {
 
     public boolean orderTicket(TicketRequest ticketRequest) {
         try {
-            PersonResponse[] personResponse = webClient.get()
+            PersonResponse personResponse = webClient.get()
                     .uri(personServiceBaseUrl + "/api/person/" + ticketRequest.getPersonEmail())
                     .retrieve()
-                    .bodyToMono(PersonResponse[].class)
+                    .bodyToMono(PersonResponse.class)
                     .block();
-            if (personResponse != null && personResponse[0].isVisitor()) {
+            if (personResponse != null && personResponse.isVisitor()) {
                 Ticket ticket = Ticket.builder()
                         .ticketNumber(UUID.randomUUID().toString())
                         .eventName(ticketRequest.getEventName())
