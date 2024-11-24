@@ -23,7 +23,7 @@ public class PersonController {
         boolean result = personService.createPerson(personRequest);
         return result
                 ? ResponseEntity.status(HttpStatus.CREATED).body("Person created successfully")
-                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create person or email might already exist");
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create person or email/phone might already exist");
     }
 
     @GetMapping("/{email}")

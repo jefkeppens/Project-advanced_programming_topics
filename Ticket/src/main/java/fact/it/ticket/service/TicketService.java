@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -54,7 +55,7 @@ public class TicketService {
 
                 return true;
             }
-        } catch(WebClientRequestException exception) {
+        } catch(WebClientResponseException exception) {
             return false;
         }
 

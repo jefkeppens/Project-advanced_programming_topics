@@ -21,7 +21,8 @@ public class PersonService {
     public boolean createPerson(PersonRequest personRequest) {
         try {
             Optional<Person> optionalPerson = personRepository.findByEmail(personRequest.getEmail());
-            if (optionalPerson.isPresent()) {
+            Optional<Person> optionalPerson1 = personRepository.findByPhone(personRequest.getPhone());
+            if (optionalPerson.isPresent() || optionalPerson1.isPresent()) {
                 return false;
             }
             Person person = Person.builder()

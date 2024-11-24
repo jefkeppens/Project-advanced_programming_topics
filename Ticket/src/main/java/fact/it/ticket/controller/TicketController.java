@@ -24,7 +24,7 @@ public class TicketController {
         boolean result = ticketService.orderTicket(ticketRequest);
         return result
                 ? ResponseEntity.status(HttpStatus.CREATED).body("Tickets ordered successfully")
-                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to order tickets or person not selected as visitor");
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to order tickets (person might not exist or person not selected as visitor)");
     }
 
     @DeleteMapping("/{ticketNumber}")
