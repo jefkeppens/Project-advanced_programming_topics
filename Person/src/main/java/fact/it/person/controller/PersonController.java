@@ -7,6 +7,7 @@ import fact.it.person.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,32 +19,43 @@ public class PersonController {
     private final PersonService personService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createPerson(@RequestBody PersonRequest personRequest) {
-        personService.createPerson(personRequest);
+    public ResponseEntity<String> createPerson(@RequestBody PersonRequest personRequest) {
+        boolean result = personService.createPerson(personRequest);
+        return result
+                ? ResponseEntity.status(HttpStatus.CREATED).body("Person created successfully")
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create person or email might already exist");
     }
 
     @GetMapping("/{email}")
-    @ResponseStatus(HttpStatus.OK)
-    public PersonResponse getByEmail(@PathVariable String email) {
-        return personService.getByEmail(email);
+    public ResponseEntity<PersonResponse> getByEmail(@PathVariable String email) {
+        PersonResponse personResponse = personService.getByEmail(email);
+        return personResponse != null
+                ? ResponseEntity.status(HttpStatus.OK).body(personResponse)
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<PersonResponse> getAllPeople() {
-        return personService.getAllPeople();
+    public ResponseEntity<List<PersonResponse>> getAllPeople() {
+        List<PersonResponse> people = personService.getAllPeople();
+        return people.isEmpty()
+                ? ResponseEntity.status(HttpStatus.NO_CONTENT).body(people)
+                : ResponseEntity.status(HttpStatus.OK).body(people);
     }
 
     @PutMapping("/{email}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updatePerson(@PathVariable String email, @RequestBody PersonRequest personRequest) {
-        personService.updatePerson(email, personRequest);
+    public ResponseEntity<String> updatePerson(@PathVariable String email, @RequestBody PersonRequest personRequest) {
+        boolean result = personService.updatePerson(email, personRequest);
+        return result
+                ? ResponseEntity.status(HttpStatus.OK).body("Person updated successfully")
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update person, email might not exist");
     }
 
     @DeleteMapping("/{email}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deletePerson(@PathVariable String email) {
-        personService.removePerson(email);
+    public ResponseEntity<String> deletePerson(@PathVariable String email) {
+        boolean result = personService.removePerson(email);
+        return result
+                ? ResponseEntity.status(HttpStatus.OK).body("Person deleted successfully")
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body("Failed to delete person, email might not exist");
     }
 }
+

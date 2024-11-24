@@ -17,17 +17,26 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PersonService {
     private final PersonRepository personRepository;
-    private final WebClient webClient;
 
-    public void createPerson(PersonRequest personRequest) {
-        Person person = Person.builder()
-                .name(personRequest.getName())
-                .email(personRequest.getEmail())
-                .phone(personRequest.getPhone())
-                .visitor(personRequest.isVisitor())
-                .build();
+    public boolean createPerson(PersonRequest personRequest) {
+        try {
+            Optional<Person> optionalPerson = personRepository.findByEmail(personRequest.getEmail());
+            if (optionalPerson.isPresent()) {
+                return false;
+            }
+            Person person = Person.builder()
+                    .name(personRequest.getName())
+                    .email(personRequest.getEmail())
+                    .phone(personRequest.getPhone())
+                    .visitor(personRequest.isVisitor())
+                    .build();
 
-        personRepository.save(person);
+            personRepository.save(person);
+
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
     public PersonResponse getByEmail(String email) {

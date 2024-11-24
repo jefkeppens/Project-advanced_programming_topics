@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/ticket")
@@ -18,35 +20,43 @@ public class TicketController {
     private final TicketService ticketService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public String orderTicket(@RequestBody TicketRequest ticketRequest) {
+    public ResponseEntity<String> orderTicket(@RequestBody TicketRequest ticketRequest) {
         boolean result = ticketService.orderTicket(ticketRequest);
-        return (result ? "Tickets ordered successfully" : "Failed to order tickets");
+        return result
+                ? ResponseEntity.status(HttpStatus.CREATED).body("Tickets ordered successfully")
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to order tickets or person not selected as visitor");
     }
 
     @DeleteMapping("/{ticketNumber}")
-    @ResponseStatus(HttpStatus.OK)
-    public String deleteTicket(@PathVariable String ticketNumber) {
+    public ResponseEntity<String> deleteTicket(@PathVariable String ticketNumber) {
         boolean result = ticketService.removeTicket(ticketNumber);
-        return (result ? "Ticket successfully deleted" : "Failed to delete ticket");
+        return result
+                ? ResponseEntity.status(HttpStatus.OK).body("Ticket successfully deleted")
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body("Failed to delete ticket or ticket doesn't exist");
     }
 
     @PutMapping("/{ticketNumber}")
-    @ResponseStatus(HttpStatus.OK)
-    public String updateTicket(@PathVariable String ticketNumber, @RequestBody TicketRequest ticketRequest) {
+    public ResponseEntity<String> updateTicket(@PathVariable String ticketNumber, @RequestBody TicketRequest ticketRequest) {
         boolean result = ticketService.updateTicket(ticketNumber, ticketRequest);
-        return (result ? "Ticket updated successfully" : "Failed to update ticket");
+        return result
+                ? ResponseEntity.status(HttpStatus.OK).body("Ticket updated successfully")
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update ticket or ticket doesn't exist");
     }
 
     @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<TicketResponse> getAllTickets() {
-        return ticketService.getAllTickets();
+    public ResponseEntity<List<TicketResponse>> getAllTickets() {
+        List<TicketResponse> tickets = ticketService.getAllTickets();
+        return tickets.isEmpty()
+                ? ResponseEntity.status(HttpStatus.NO_CONTENT).body(tickets)
+                : ResponseEntity.status(HttpStatus.OK).body(tickets);
     }
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public TicketResponse getByTicketNumber(@RequestParam String ticketNumber) {
-        return ticketService.getByTicketNumber(ticketNumber);
+    @GetMapping("/{ticketNumber}")
+    public ResponseEntity<TicketResponse> getByTicketNumber(@PathVariable String ticketNumber) {
+        TicketResponse ticketResponse = ticketService.getByTicketNumber(ticketNumber);
+        return ticketResponse != null
+                ? ResponseEntity.status(HttpStatus.OK).body(ticketResponse)
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }
+
