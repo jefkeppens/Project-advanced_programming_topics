@@ -4,9 +4,7 @@ import fact.it.frontend.Request.EventRequest;
 import fact.it.frontend.Service.EventService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -42,6 +40,21 @@ public class EventController {
         // Add message based on the result
         model.addAttribute("message", result != null ? "Event added successfully" : "Failed to add event");
         return "events"; // Redirect or show a confirmation message (you can adjust this)
+    }
+
+    @RequestMapping("/events/delete/{eventName}")
+    public String deleteEvent(@PathVariable String eventName) {
+        // Call the service to delete the event
+        Object response = eventService.deleteEvent(eventName);
+
+        // Handle the response (you can choose to show a success message or error)
+        // Here, I'm assuming a successful deletion redirects to the event list page
+        if (response != null) {
+            return "redirect:/events";  // Redirect to events listing page after successful deletion
+        } else {
+            // You can add error handling here, if needed
+            return "index"; // Return an error page if deletion fails
+        }
     }
 
 

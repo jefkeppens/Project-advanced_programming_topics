@@ -19,6 +19,9 @@
         <td th:text="${event.location}"></td>
         <td th:text="${event.name}"></td>
         <td th:text="${event.date}"></td>
+        <td>
+            <a th:href="@{/events/delete/{name}(name=${event.name})}">Delete</a>
+        </td>
     </tr>
     </tbody>
 </table>
