@@ -102,6 +102,16 @@ services:
       EVENT_SERVICE_BASEURL: event-service:8081
       RIDE_SERVICE_BASEURL: ride-service:8080
 
+  frontend:
+    depends_on:
+      - api-gateway
+    image: jefk13/frontend
+    container_name: frontend
+    ports:
+      - 8085:8085
+    environment:
+      API_GATEWAY_URL: api-gateway:8084
+
 volumes:
   mongodb_person_data:
   mysql_ticket_data:
