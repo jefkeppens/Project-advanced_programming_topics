@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Rides</title>
+</head>
+<body>
+<h1>Rides</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Capacity</th>
+        <th>Duration</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ride : ${rides}">
+        <td th:text="${ride.name}"></td>
+        <td th:text="${ride.type}"></td>
+        <td th:text="${ride.capacity}"></td>
+        <td th:text="${ride.duration}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
