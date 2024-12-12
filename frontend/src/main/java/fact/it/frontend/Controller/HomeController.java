@@ -15,9 +15,14 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("events", eventService.getAllEvents());
+    public String home() {
         return "index";
+    }
+
+    @GetMapping("/events")
+    public String events(Model model){
+        model.addAttribute("events", eventService.getAllEvents());
+        return "events";
     }
 }
 

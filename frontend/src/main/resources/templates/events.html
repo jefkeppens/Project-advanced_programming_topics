@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Events</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Location</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.location}"></td>
+        <td th:text="${event.name}"></td>
+        <td th:text="${event.date}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
