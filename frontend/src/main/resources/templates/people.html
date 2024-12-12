@@ -21,9 +21,15 @@
         <td th:text="${person.visitor ? 'Yes' : 'No'}"></td>
         <td th:text="${person.phone}"></td>
         <td th:text="${person.email}"></td>
+        <td>
+            <a th:href="@{/people/delete/{name}(name=${person.email})}">Delete</a>
+        </td>
     </tr>
     </tbody>
 </table>
+<a href="/people/add">
+    <button>Add person</button>
+</a>
 <a href="/">
     <button>Home</button>
 </a>

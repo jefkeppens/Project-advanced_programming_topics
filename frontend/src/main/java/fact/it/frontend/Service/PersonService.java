@@ -38,4 +38,35 @@ public class PersonService {
         // Return the response body (the list of tickets)
         return response.getBody();
     }
+
+    public Object addPerson(Object personRequest) {
+        String url = apiGatewayUrl + "/people/add";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(authService.getToken());
+
+        HttpEntity<Object> requestEntity = new HttpEntity<>(personRequest, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url, HttpMethod.POST, requestEntity, String.class // Expect plain text or generic response
+        );
+
+        return response.getBody(); // Return raw response as needed
+    }
+
+    public Object deletePerson(String personEmail) {
+        String url = apiGatewayUrl + "/people/delete/" + personEmail;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(authService.getToken());
+
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url, HttpMethod.DELETE, requestEntity, String.class // Expect plain text or generic response
+        );
+
+        return response.getBody(); // Return raw response as needed
+    }
+
 }
