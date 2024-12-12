@@ -1,14 +1,11 @@
 package fact.it.frontend.Controller;
 
-import fact.it.frontend.Request.EventRequest;
 import fact.it.frontend.Request.RideRequest;
 import fact.it.frontend.Service.AuthService;
 import fact.it.frontend.Service.RideService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @Controller
 public class RideController {

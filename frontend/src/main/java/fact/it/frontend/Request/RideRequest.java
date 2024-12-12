@@ -1,7 +1,5 @@
 package fact.it.frontend.Request;
 
-import java.time.LocalDate;
-
 public class RideRequest {
 
     private String name;
