@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Ride</title>
+</head>
+<body>
+<h1>Add Ride</h1>
+<form action="/rides/add" method="post">
+    <label for="name">Ride Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="type">Ride Type:</label>
+    <input type="text" id="type" name="type" required><br><br>
+
+    <label for="capacity">Ride Capacity:</label>
+    <input type="text" id="capacity" name="capacity" required><br><br>
+
+    <label for="duration">Ride Duration:</label>
+    <input type="text" id="duration" name="duration" required><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+<a href="/rides">
+    <button>Back</button>
+</a>
+</body>
+</html>

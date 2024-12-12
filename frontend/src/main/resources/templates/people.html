@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>People</title>
+</head>
+<body>
+<h1>People</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Visitor</th>
+        <th>Phone</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${people}">
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.visitor ? 'Yes' : 'No'}"></td>
+        <td th:text="${person.phone}"></td>
+        <td th:text="${person.email}"></td>
+        <td>
+            <a th:href="@{/people/delete/{name}(name=${person.email})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/people/add">
+    <button>Add person</button>
+</a>
+<a href="/">
+    <button>Home</button>
+</a>
+</body>
+</html>
