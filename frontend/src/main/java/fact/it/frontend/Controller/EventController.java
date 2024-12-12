@@ -1,6 +1,7 @@
 package fact.it.frontend.Controller;
 
 import fact.it.frontend.Request.EventRequest;
+import fact.it.frontend.Service.AuthService;
 import fact.it.frontend.Service.EventService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,11 @@ import java.time.LocalDate;
 public class EventController {
 
     private final EventService eventService;
+    private final AuthService authService;
 
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, AuthService authService) {
         this.eventService = eventService;
+        this.authService = authService;
     }
 
     @GetMapping("/events")
@@ -25,6 +28,9 @@ public class EventController {
 
     @GetMapping("/events/add")
     public String addEventPage() {
+        if(authService.getToken() == null){
+            return "errorunauth";
+        }
         return "addEvent";
     }
 
@@ -39,6 +45,9 @@ public class EventController {
 
     @RequestMapping("/events/delete/{eventName}")
     public String deleteEvent(@PathVariable String eventName, Model model) {
+        if(authService.getToken() == null){
+            return "errorunauth";
+        }
         eventService.deleteEvent(eventName);
         model.addAttribute("events", eventService.getAllEvents());
         return "events";
