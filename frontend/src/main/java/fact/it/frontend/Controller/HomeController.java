@@ -23,10 +23,5 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/rides")
-    public String rides(Model model){
-        model.addAttribute("rides", rideService.getAllRides());
-        return "rides";
-    }
 }
 

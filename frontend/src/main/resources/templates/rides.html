@@ -21,8 +21,17 @@
         <td th:text="${ride.type}"></td>
         <td th:text="${ride.capacity}"></td>
         <td th:text="${ride.duration}"></td>
+        <td>
+            <a th:href="@{/rides/delete/{name}(name=${ride.name})}">Delete</a>
+        </td>
     </tr>
     </tbody>
 </table>
+<a href="/rides/add">
+    <button>Add ride</button>
+</a>
+<a href="/">
+    <button>Home</button>
+</a>
 </body>
 </html>
