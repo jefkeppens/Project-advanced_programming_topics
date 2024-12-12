@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Tickets</title>
+</head>
+<body>
+<h1>Tickets</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Number</th>
+        <th>Date</th>
+        <th>Event name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ticket : ${tickets}">
+        <td th:text="${ticket.ticketNumber}"></td>
+        <td th:text="${ticket.purchaseDate}"></td>
+        <td th:text="${ticket.eventName}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

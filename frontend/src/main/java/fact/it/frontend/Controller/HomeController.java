@@ -2,6 +2,7 @@ package fact.it.frontend.Controller;
 
 import fact.it.frontend.Service.EventService;
 import fact.it.frontend.Service.RideService;
+import fact.it.frontend.Service.TicketService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
