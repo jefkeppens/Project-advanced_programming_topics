@@ -23,12 +23,6 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/events")
-    public String events(Model model){
-        model.addAttribute("events", eventService.getAllEvents());
-        return "events";
-    }
-
     @GetMapping("/rides")
     public String rides(Model model){
         model.addAttribute("rides", rideService.getAllRides());

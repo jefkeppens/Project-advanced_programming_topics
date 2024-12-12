@@ -10,14 +10,14 @@
     <thead>
     <tr>
         <th>Name</th>
-        <th>Date</th>
         <th>Location</th>
+        <th>Date</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="event : ${events}">
-        <td th:text="${event.location}"></td>
         <td th:text="${event.name}"></td>
+        <td th:text="${event.location}"></td>
         <td th:text="${event.date}"></td>
         <td>
             <a th:href="@{/events/delete/{name}(name=${event.name})}">Delete</a>
@@ -27,6 +27,9 @@
 </table>
 <a href="/events/add">
     <button>Add event</button>
+</a>
+<a href="/">
+    <button>Home</button>
 </a>
 </body>
 </html>

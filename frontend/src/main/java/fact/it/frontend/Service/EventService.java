@@ -42,6 +42,22 @@ public class EventService {
         return response.getBody();
     }
 
+    public Object editEvent(String eventName) {
+        String url = apiGatewayUrl + "/events/update/" + eventName;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(authService.getToken());
+
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+
+        ResponseEntity<Object> response = restTemplate.exchange(
+                url, HttpMethod.DELETE, requestEntity, Object.class
+        );
+
+        return response.getBody();
+    }
+
+
     public Object deleteEvent(String eventName) {
         String url = apiGatewayUrl + "/events/delete/" + eventName;
 
