@@ -1,7 +1,5 @@
 package fact.it.frontend.Request;
 
-import java.time.LocalDate;
-
 public class PersonRequest {
 
     private String name;
