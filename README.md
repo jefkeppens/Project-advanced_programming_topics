@@ -30,6 +30,7 @@ Our project revolves around the theme of an amusement park.
 - API gateway (Access to all microservices)
   - Port: 8084
 ### Deployment diagram:
+![Deployment diagram](Images/apt.jpg)
 
 ## Extra's
 ### Front-end:
@@ -39,33 +40,37 @@ Connects to API gateway to access microservices.
 ## Functional endpoints (Postman)
 ### Person (auth. needed for all endpoints):
 #### Create:
-
+![Create person](Images/Person/create.png)
 #### Get all:
-
+![Get person](Images/Person/get.png)
 #### Update:
-
+![Update person](Images/Person/put.png)
 #### Delete:
+![Delete person](Images/Person/delete.png)
 ### Ride (auth. needed for create, update, delete):
 #### Create:
-
+![Create ride](Images/Ride/create.png)
 #### Get all:
-
+![Get ride](Images/Ride/get.png)
 #### Update:
-
+![Update ride](Images/Ride/update.png)
 #### Delete:
+![Delete ride](Images/Ride/delete.png)
 ### Event (auth. needed for create, update, delete):
 #### Create:
-
+![Create event](Images/Event/create.png)
 #### Get all:
-
+![Get event](Images/Event/get.png)
 #### Update:
-
+![Update event](Images/Event/update.png)
 #### Delete:
+![Delete event](Images/Event/delete.png)
 ### Ticket (auth. needed for all endpoints):
 #### Create:
-
+![Create ticket](Images/Ticket/create.png)
 #### Get all:
-
+![Get ticket](Images/Ticket/get.png)
 #### Update:
-
+![Update ticket](Images/Ticket/update.png)
 #### Delete:
+![Delete ticket](Images/Ticket/delete.png)
