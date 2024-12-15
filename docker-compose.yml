@@ -109,8 +109,7 @@ services:
     container_name: frontend
     ports:
       - 8085:8085
-    environment:
-      API_GATEWAY_URL: localhost:8084
+
 
 volumes:
   mongodb_person_data:
