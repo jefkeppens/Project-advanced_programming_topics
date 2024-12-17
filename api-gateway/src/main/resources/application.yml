@@ -208,11 +208,8 @@ management:
     web:
       exposure:
         include: prometheus
-management:
   endpoint:
     prometheus:
       enabled: true
-management:
-  endpoints:
     web:
       base-path: /metrics
