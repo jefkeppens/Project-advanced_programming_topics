@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-people
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-people
+  template:
+    metadata:
+      labels:
+        app: mongo-people
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongodb-storage
+              mountPath: /data/db
+      volumes:
+        - name: mongodb-storage
+          persistentVolumeClaim:
+            claimName: mongodb-person-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-people
+spec:
+  ports:
+    - port: 27017
+  selector:
+    app: mongo-people
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-rides
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-rides
+  template:
+    metadata:
+      labels:
+        app: mongo-rides
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongodb-storage
+              mountPath: /data/db
+      volumes:
+        - name: mongodb-storage
+          persistentVolumeClaim:
+            claimName: mongodb-ride-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-rides
+spec:
+  ports:
+    - port: 27017
+  selector:
+    app: mongo-rides
