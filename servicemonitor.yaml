@@ -1,0 +1,107 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: event-service-monitor
+  namespace: monitoring
+  labels:
+    release: prometheus-operator
+spec:
+  endpoints:
+  - port: http-event-metrics
+    path: /metrics/prometheus
+  selector:
+    matchLabels:
+      app: event-service
+  namespaceSelector:
+    matchNames:
+      - default
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ticket-service-monitor
+  namespace: monitoring
+  labels:
+    release: prometheus-operator
+spec:
+  endpoints:
+  - port: http-ticket-metrics
+    path: /metrics/prometheus
+  selector:
+    matchLabels:
+      app: ticket-service
+  namespaceSelector:
+    matchNames:
+      - default
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ride-service-monitor
+  namespace: monitoring
+  labels:
+    release: prometheus-operator
+spec:
+  endpoints:
+  - port: http-ride-metrics
+    path: /metrics/prometheus
+  selector:
+    matchLabels:
+      app: ride-service
+  namespaceSelector:
+    matchNames:
+      - default
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: person-service-monitor
+  namespace: monitoring
+  labels:
+    release: prometheus-operator
+spec:
+  endpoints:
+  - port: http-person-metrics
+    path: /metrics/prometheus
+  selector:
+    matchLabels:
+      app: person-service
+  namespaceSelector:
+    matchNames:
+      - default
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: gateway-service-monitor
+  namespace: monitoring
+  labels:
+    release: prometheus-operator
+spec:
+  endpoints:
+  - port: http-gateway-metrics
+    path: /metrics/prometheus
+  selector:
+    matchLabels:
+      app: api-gateway
+  namespaceSelector:
+    matchNames:
+      - default
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: frontend-service-monitor
+  namespace: monitoring
+  labels:
+    release: prometheus-operator
+spec:
+  endpoints:
+  - port: http-frontend-metrics
+    path: /metrics/prometheus
+  selector:
+    matchLabels:
+      app: frontend
+  namespaceSelector:
+    matchNames:
+      - default
