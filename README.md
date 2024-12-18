@@ -37,6 +37,23 @@ Our project revolves around the theme of an amusement park.
 Connects to API gateway to access microservices.
 - Port: 8085
 - Runs in Docker container
+### Kubernetes
+![Kubernetes pods](Images/k8s/show_pods.png)
+### Prometheus
+#### Pods:
+![Prometheus pods](Images/k8s/Prometheus_pods.png)
+#### Targets
+![Prometheus Part1](Images/k8s/Prometheus_part1.png)
+![Prometheus Part2](Images/k8s/Prometheus_part2.png)
+#### Query example
+![Prometheus query](Images/k8s/prometheus_graph.png)
+
+### Grafana
+#### Dashboard
+![Grafana Dashboard](Images/k8s/Grafana_Dashboard.png)
+### Our services:
+![Grafana Services](Images/k8s/Grafana_my_services.png)
+
 ## Functional endpoints (Postman)
 ### Person (auth. needed for all endpoints):
 #### Create:

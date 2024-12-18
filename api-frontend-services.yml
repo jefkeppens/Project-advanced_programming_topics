@@ -74,7 +74,7 @@ metadata:
     app: frontend
 spec:
   ports:
-    - port: 8083
+    - port: 8085
       targetPort: front-metrics  # Use the container port name
       name: http-frontend-metrics
   selector:
