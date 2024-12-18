@@ -211,5 +211,3 @@ management:
   endpoint:
     prometheus:
       enabled: true
-    web:
-      base-path: /metrics

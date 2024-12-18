@@ -80,7 +80,7 @@ metadata:
 spec:
   endpoints:
   - port: http-gateway-metrics
-    path: /metrics/prometheus
+    path: /actuator/prometheus
   selector:
     matchLabels:
       app: api-gateway
