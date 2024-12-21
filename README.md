@@ -30,6 +30,7 @@ Our project revolves around the theme of an amusement park.
 - API gateway (Access to all microservices)
   - Port: 8084
 ### Deployment diagram:
+![Deployment diagram](Images/apt.jpg)
 
 ## Extra's
 ### Front-end:
